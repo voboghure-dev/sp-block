@@ -1,0 +1,28 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "sp-block/dynamic-blog-post",
+	"version": "0.1.0",
+	"title": "Dynamic Blog Post",
+	"category": "storepress-blocks",
+	"icon": "admin-plugins",
+	"description": "Custom gutenberg block for StorePress",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"content": {
+			"type": "string",
+			"source": "html",
+			"selector": "p"
+		},
+		"align": {
+			"type": "string",
+			"default": "none"
+		}
+	},
+	"textdomain": "sp-block",
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css"
+}
