@@ -27,10 +27,22 @@ function sp_block_init() {
 					'default' => 'SP Block Plugin – hello from the editor!',
 					'type'    => 'string',
 				],
-				'blockInput' => [
-					'default' => 'This is funny',
-					'type' => 'string',
-				]
+				'blockColor' => [
+					'default' => '',
+					'type'    => 'string',
+				],
+				'blockBackground' => [
+					'default' => '',
+					'type'    => 'string',
+				],
+				'blockColumns' => [
+					'default' => '',
+					'type'    => 'number',
+				],
+				'blockRows' => [
+					'default' => '',
+					'type'    => 'number',
+				],
 			],
 			'render_callback' => 'render_callback_blog_post',
 		]
@@ -39,12 +51,21 @@ function sp_block_init() {
 add_action( 'init', 'sp_block_init' );
 
 function render_callback_blog_post( $attributes, $content ) {
+	// Get external products.
+	$args = array(
+		'type' => 'bundle',
+	);
+	$products = wc_get_products( $args );
+	foreach ( $products as $product ) {
+		$id[] = $product->get_id();
+	}
+	// log_it($id);
+	log_it($attributes);
 	$block_text = esc_html( $attributes['blockText'] );
-	// log_it($attributes);
-	return "<p class='sp-block-dynamic-blog-post'>$block_text</p>";
+	return '<p style="color:' . $attributes['blockColor'] . '; background:' . $attributes['blockBackground'] . ';">' . $block_text . '</p>';
 }
 
-function wholesomecode_wholesome_plugin_remove_blocks_in_draft( $pre_render, $block ) {
+function sp_remove_blocks_in_draft( $pre_render, $block ) {
 
 	// If we are in the admin interface, bail.
 	if ( is_admin() ) {
@@ -63,7 +84,7 @@ function wholesomecode_wholesome_plugin_remove_blocks_in_draft( $pre_render, $bl
 	// Otherwise, render the block.
 	return $pre_render;
 }
-add_filter( 'pre_render_block', 'wholesomecode_wholesome_plugin_remove_blocks_in_draft', 0, 2 );
+// add_filter( 'pre_render_block', 'sp_remove_blocks_in_draft', 0, 2 );
 
 /**
  * Create custom category

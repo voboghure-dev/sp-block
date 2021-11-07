@@ -38,5 +38,13 @@ registerBlockType( 'sp-block/dynamic-blog-post', {
 		  	default: 'SP Block Plugin – hello from the editor!',
 		  	type: 'string',
 		},
+		bundle_columns: {
+			default: '',
+			type: 'number'
+		},
+		bundle_rows: {
+			default: '',
+			type: 'number'
+		}
 	},
 } );

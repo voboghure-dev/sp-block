@@ -1,17 +1,55 @@
 import { __ } from '@wordpress/i18n';
 
 import { ContrastChecker, InspectorControls, PanelColorSettings, RichText, useBlockProps } from '@wordpress/block-editor';
-import { Panel, PanelBody, TextControl, ToggleControl } from '@wordpress/components';
+import { Panel, PanelBody, TextControl, ToggleControl, SelectControl, RangeControl } from '@wordpress/components';
+import { useState } from '@wordpress/element';
 
 import './editor.scss';
 
 export default function Edit( { attributes, setAttributes } ) {
 	const { blockBackground, blockColor, blockText, isBlockDraft } = attributes;
+	const [ size, setSize ] = useState( '50%' );
+	const [ blockColumns, setColumns ] = useState( 2 );
+	const [ blockRows, setRows ] = useState( 1 );
 
 	return [
 
 		<InspectorControls>
 			<Panel>
+				<PanelBody
+					title={ __( 'Column & Row', 'sp-block' ) }
+					icon="grid-view"
+				>
+					<RangeControl
+						label="Columns"
+						value={ blockColumns }
+						onChange={ ( value ) => setColumns( value ) }
+						min={ 2 }
+						max={ 10 }
+					/>
+					<RangeControl
+						label="Rows"
+						value={ blockRows }
+						onChange={ ( value ) => setRows( value ) }
+						min={ 1 }
+						max={ 10 }
+					/>
+				</PanelBody>
+				<PanelBody
+					title={ __( 'Select Product', 'sp-block' ) }
+					icon="admin-plugins"
+				>
+					<SelectControl
+						label="Size"
+						value={ size }
+						options={ [
+							{ label: 'Big', value: '100%' },
+							{ label: 'Medium', value: '50%' },
+							{ label: 'Small', value: '25%' },
+						] }
+						onChange={ ( newSize ) => setSize( newSize ) }
+					/>
+				</PanelBody>
 				<PanelBody
 					title={ __( 'Block Content Settings', 'sp-block' ) }
 					icon="admin-plugins"
@@ -38,7 +76,8 @@ export default function Edit( { attributes, setAttributes } ) {
 							onChange: ( blockBackground ) =>  setAttributes( { blockBackground } ),
 							label: __( 'Background Color', 'sp-block' ),
 						}
-					] }>
+					] }
+				>
 						<ContrastChecker
 							isLargeText="false"
 							textColor={blockColor}
@@ -46,13 +85,13 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 				</PanelColorSettings>
 				<PanelBody
-					title={ __( 'Block Display Settings', 'wholesome-plugin' ) }
+					title={ __( 'Block Display Settings', 'sp-block' ) }
 					icon="visibility"
 				>
 					<ToggleControl
 						checked={ isBlockDraft }
-						label={ __( 'Set Block as Draft', 'wholesome-plugin' ) }
-						help={ __( 'If the block is set to draft it will not show on the front end..', 'wholesome-plugin' ) }
+						label={ __( 'Set Block as Draft', 'sp-block' ) }
+						help={ __( 'If the block is set to draft it will not show on the front end..', 'sp-block' ) }
 						onChange={ ( isBlockDraft ) => setAttributes( { isBlockDraft } ) }
 					/>
 				</PanelBody>

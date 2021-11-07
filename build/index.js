@@ -28,6 +28,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function Edit({
   attributes,
   setAttributes
@@ -38,7 +39,42 @@ function Edit({
     blockText,
     isBlockDraft
   } = attributes;
+  const [size, setSize] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)('50%');
+  const [blockColumns, setColumns] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(2);
+  const [blockRows, setRows] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(1);
   return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Panel, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Column & Row', 'sp-block'),
+    icon: "grid-view"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+    label: "Columns",
+    value: blockColumns,
+    onChange: value => setColumns(value),
+    min: 2,
+    max: 10
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+    label: "Rows",
+    value: blockRows,
+    onChange: value => setRows(value),
+    min: 1,
+    max: 10
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select Product', 'sp-block'),
+    icon: "admin-plugins"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+    label: "Size",
+    value: size,
+    options: [{
+      label: 'Big',
+      value: '100%'
+    }, {
+      label: 'Medium',
+      value: '50%'
+    }, {
+      label: 'Small',
+      value: '25%'
+    }],
+    onChange: newSize => setSize(newSize)
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Block Content Settings', 'sp-block'),
     icon: "admin-plugins"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.TextControl, {
@@ -70,12 +106,12 @@ function Edit({
     textColor: blockColor,
     backgroundColor: blockBackground
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Block Display Settings', 'wholesome-plugin'),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Block Display Settings', 'sp-block'),
     icon: "visibility"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
     checked: isBlockDraft,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Set Block as Draft', 'wholesome-plugin'),
-    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('If the block is set to draft it will not show on the front end..', 'wholesome-plugin'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Set Block as Draft', 'sp-block'),
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('If the block is set to draft it will not show on the front end..', 'sp-block'),
     onChange: isBlockDraft => setAttributes({
       isBlockDraft
     })
@@ -144,6 +180,14 @@ __webpack_require__.r(__webpack_exports__);
     blockText: {
       default: 'SP Block Plugin – hello from the editor!',
       type: 'string'
+    },
+    bundle_columns: {
+      default: '',
+      type: 'number'
+    },
+    bundle_rows: {
+      default: '',
+      type: 'number'
     }
   }
 });
