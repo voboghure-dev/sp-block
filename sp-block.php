@@ -23,8 +23,20 @@ function sp_block_init() {
 		__DIR__,
 		[
 			'attributes'      => [
+				'blockColumns' => [
+					'default' => null,
+					'type'    => 'number',
+				],
+				'blockRows' => [
+					'default' => null,
+					'type'    => 'number',
+				],
+				'blockSize' => [
+					'default' => null,
+					'type'    => 'string',
+				],
 				'blockText' => [
-					'default' => 'SP Block Plugin – hello from the editor!',
+					'default' => 'SP Block Plugin – hello from PHP!',
 					'type'    => 'string',
 				],
 				'blockColor' => [
@@ -35,13 +47,9 @@ function sp_block_init() {
 					'default' => '',
 					'type'    => 'string',
 				],
-				'blockColumns' => [
+				'isBlockDraft' => [
 					'default' => '',
-					'type'    => 'number',
-				],
-				'blockRows' => [
-					'default' => '',
-					'type'    => 'number',
+					'type'    => 'string',
 				],
 			],
 			'render_callback' => 'render_callback_blog_post',
@@ -52,13 +60,13 @@ add_action( 'init', 'sp_block_init' );
 
 function render_callback_blog_post( $attributes, $content ) {
 	// Get external products.
-	$args = array(
-		'type' => 'bundle',
-	);
-	$products = wc_get_products( $args );
-	foreach ( $products as $product ) {
-		$id[] = $product->get_id();
-	}
+	// $args = array(
+	// 	'type' => 'bundle',
+	// );
+	// $products = wc_get_products( $args );
+	// foreach ( $products as $product ) {
+	// 	$id[] = $product->get_id();
+	// }
 	// log_it($id);
 	log_it($attributes);
 	$block_text = esc_html( $attributes['blockText'] );

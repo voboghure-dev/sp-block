@@ -24,27 +24,29 @@ registerBlockType( 'sp-block/dynamic-blog-post', {
 	save: () => null,
 
 	attributes: {
-		isBlockDraft: {
-			default: false,
-			type: 'boolean',
+		blockColumns: {
+			type: 'string'
 		},
+		blockRows: {
+			type: 'string'
+		},
+		blockSize: {
+			default: '',
+			type: 'string',
+	  	},
+		  blockText: {
+			default: 'SP Block Plugin – hello from the editor!',
+			type: 'string',
+	  	},
 		blockColor: {
 			type: 'string',
 		},
 		blockBackground: {
 			type: 'string',
 		},
-		blockText: {
-		  	default: 'SP Block Plugin – hello from the editor!',
-		  	type: 'string',
-		},
-		bundle_columns: {
-			default: '',
-			type: 'number'
-		},
-		bundle_rows: {
-			default: '',
-			type: 'number'
+		isBlockDraft: {
+			default: false,
+			type: 'boolean',
 		}
 	},
 } );

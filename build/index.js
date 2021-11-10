@@ -34,27 +34,31 @@ function Edit({
   setAttributes
 }) {
   const {
+    blockColumns,
+    blockRows,
+    blockSize,
     blockBackground,
     blockColor,
     blockText,
     isBlockDraft
   } = attributes;
-  const [size, setSize] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)('50%');
-  const [blockColumns, setColumns] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(2);
-  const [blockRows, setRows] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(1);
   return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Panel, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Column & Row', 'sp-block'),
     icon: "grid-view"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
     label: "Columns",
     value: blockColumns,
-    onChange: value => setColumns(value),
+    onChange: blockColumns => setAttributes({
+      blockColumns
+    }),
     min: 2,
     max: 10
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
     label: "Rows",
     value: blockRows,
-    onChange: value => setRows(value),
+    onChange: blockRows => setAttributes({
+      blockRows
+    }),
     min: 1,
     max: 10
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
@@ -62,7 +66,7 @@ function Edit({
     icon: "admin-plugins"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     label: "Size",
-    value: size,
+    value: blockSize,
     options: [{
       label: 'Big',
       value: '100%'
@@ -73,9 +77,11 @@ function Edit({
       label: 'Small',
       value: '25%'
     }],
-    onChange: newSize => setSize(newSize)
+    onChange: blockSize => setAttributes({
+      blockSize
+    })
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Block Content Settings', 'sp-block'),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Block Content', 'sp-block'),
     icon: "admin-plugins"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Example Meta', 'sp-block'),
@@ -85,7 +91,7 @@ function Edit({
     }),
     value: blockText
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Block Color Settings', 'sp-block'),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Color Settings', 'sp-block'),
     icon: "art",
     initialOpen: false,
     colorSettings: [{
@@ -167,9 +173,19 @@ __webpack_require__.r(__webpack_exports__);
    */
   save: () => null,
   attributes: {
-    isBlockDraft: {
-      default: false,
-      type: 'boolean'
+    blockColumns: {
+      type: 'string'
+    },
+    blockRows: {
+      type: 'string'
+    },
+    blockSize: {
+      default: '',
+      type: 'string'
+    },
+    blockText: {
+      default: 'SP Block Plugin – hello from the editor!',
+      type: 'string'
     },
     blockColor: {
       type: 'string'
@@ -177,17 +193,9 @@ __webpack_require__.r(__webpack_exports__);
     blockBackground: {
       type: 'string'
     },
-    blockText: {
-      default: 'SP Block Plugin – hello from the editor!',
-      type: 'string'
-    },
-    bundle_columns: {
-      default: '',
-      type: 'number'
-    },
-    bundle_rows: {
-      default: '',
-      type: 'number'
+    isBlockDraft: {
+      default: false,
+      type: 'boolean'
     }
   }
 });

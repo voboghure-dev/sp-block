@@ -7,65 +7,62 @@ import { useState } from '@wordpress/element';
 import './editor.scss';
 
 export default function Edit( { attributes, setAttributes } ) {
-	const { blockBackground, blockColor, blockText, isBlockDraft } = attributes;
-	const [ size, setSize ] = useState( '50%' );
-	const [ blockColumns, setColumns ] = useState( 2 );
-	const [ blockRows, setRows ] = useState( 1 );
+	const { blockColumns, blockRows, blockSize, blockBackground, blockColor, blockText, isBlockDraft } = attributes;
 
 	return [
 
 		<InspectorControls>
 			<Panel>
 				<PanelBody
-					title={ __( 'Column & Row', 'sp-block' ) }
-					icon="grid-view"
+					title = { __( 'Column & Row', 'sp-block' ) }
+					icon = "grid-view"
 				>
 					<RangeControl
-						label="Columns"
-						value={ blockColumns }
-						onChange={ ( value ) => setColumns( value ) }
-						min={ 2 }
-						max={ 10 }
+						label = "Columns"
+						value = { blockColumns }
+						onChange = { ( blockColumns ) => setAttributes({ blockColumns }) }
+						min = { 2 }
+						max = { 10 }
 					/>
 					<RangeControl
-						label="Rows"
-						value={ blockRows }
-						onChange={ ( value ) => setRows( value ) }
-						min={ 1 }
-						max={ 10 }
+						label = "Rows"
+						value = { blockRows }
+						onChange = { ( blockRows ) => setAttributes({ blockRows }) }
+						min = { 1 }
+						max = { 10 }
 					/>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'Select Product', 'sp-block' ) }
-					icon="admin-plugins"
+					title = { __( 'Select Product', 'sp-block' ) }
+					icon = "admin-plugins"
 				>
 					<SelectControl
-						label="Size"
-						value={ size }
-						options={ [
+						label = "Size"
+						value = { blockSize }
+						options = { [
 							{ label: 'Big', value: '100%' },
 							{ label: 'Medium', value: '50%' },
 							{ label: 'Small', value: '25%' },
 						] }
-						onChange={ ( newSize ) => setSize( newSize ) }
+						onChange = { ( blockSize ) => setAttributes({ blockSize }) }
 					/>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'Block Content Settings', 'sp-block' ) }
-					icon="admin-plugins"
+					title = { __( 'Block Content', 'sp-block' ) }
+					icon = "admin-plugins"
 				>
 					<TextControl
-						label={ __( 'Example Meta', 'sp-block' ) }
-						help={ __( 'This is an example meta field.', 'sp-block' ) }
-						onChange={ ( blockText ) => setAttributes( { blockText } ) }
-						value={ blockText }
+						label = { __( 'Example Meta', 'sp-block' ) }
+						help = { __( 'This is an example meta field.', 'sp-block' ) }
+						onChange = { ( blockText ) => setAttributes( { blockText } ) }
+						value = { blockText }
 					/>
 				</PanelBody>
 				<PanelColorSettings
-					title={ __( 'Block Color Settings', 'sp-block' ) }
-					icon="art"
-					initialOpen={ false }
-					colorSettings={ [
+					title = { __( 'Color Settings', 'sp-block' ) }
+					icon = "art"
+					initialOpen = { false }
+					colorSettings = { [
 						{
 							value: blockColor,
 							onChange: ( blockColor ) =>  setAttributes( { blockColor } ),
@@ -79,20 +76,20 @@ export default function Edit( { attributes, setAttributes } ) {
 					] }
 				>
 						<ContrastChecker
-							isLargeText="false"
-							textColor={blockColor}
-							backgroundColor={blockBackground}
+							isLargeText = "false"
+							textColor = { blockColor }
+							backgroundColor = { blockBackground }
 						/>
 				</PanelColorSettings>
 				<PanelBody
-					title={ __( 'Block Display Settings', 'sp-block' ) }
-					icon="visibility"
+					title = { __( 'Block Display Settings', 'sp-block' ) }
+					icon = "visibility"
 				>
 					<ToggleControl
-						checked={ isBlockDraft }
-						label={ __( 'Set Block as Draft', 'sp-block' ) }
-						help={ __( 'If the block is set to draft it will not show on the front end..', 'sp-block' ) }
-						onChange={ ( isBlockDraft ) => setAttributes( { isBlockDraft } ) }
+						checked = { isBlockDraft }
+						label = { __( 'Set Block as Draft', 'sp-block' ) }
+						help = { __( 'If the block is set to draft it will not show on the front end..', 'sp-block' ) }
+						onChange = { ( isBlockDraft ) => setAttributes( { isBlockDraft } ) }
 					/>
 				</PanelBody>
 			</Panel>
