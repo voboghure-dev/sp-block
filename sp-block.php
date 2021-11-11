@@ -24,17 +24,17 @@ function sp_block_init() {
 		[
 			'attributes'      => [
 				'blockColumns' => [
-					'default' => null,
+					'default' => 1,
 					'type'    => 'number',
 				],
 				'blockRows' => [
-					'default' => null,
+					'default' => 1,
 					'type'    => 'number',
 				],
-				'blockSize' => [
-					'default' => null,
-					'type'    => 'string',
-				],
+				// 'blockSize' => [
+				// 	'default' => null,
+				// 	'type'    => 'string',
+				// ],
 				'blockText' => [
 					'default' => 'SP Block Plugin – hello from PHP!',
 					'type'    => 'string',
@@ -60,17 +60,37 @@ add_action( 'init', 'sp_block_init' );
 
 function render_callback_blog_post( $attributes, $content ) {
 	// Get external products.
-	// $args = array(
-	// 	'type' => 'bundle',
-	// );
-	// $products = wc_get_products( $args );
-	// foreach ( $products as $product ) {
-	// 	$id[] = $product->get_id();
-	// }
-	// log_it($id);
-	log_it($attributes);
+	$limit = (int) $attributes['blockColumns'] * (int) $attributes['blockRows'];
+	// log_it($limit);
+	$args = array(
+		'type'  => 'bundle',
+		'limit' => $limit,
+		'order' => 'DESC',
+	);
+	$products = wc_get_products( $args );
+	foreach ( $products as $product ) {
+		ob_start();
+		echo '<div class="pb-wc-product-bundles-item">';
+
+		echo '<div class="pb-wc-product-bundles-item-image">';
+		echo $product->get_image( 'woocommerce_thumbnail', array( 'class' => 'bundle_image' ) );
+		echo '</div>';
+
+		echo '<div class="pb-wc-product-bundles-item-name">';
+		echo $product->get_name();
+		echo '</div>';
+
+		echo '<div class="pb-wc-product-bundles-item-short-desc">';
+		echo $product->get_short_description();
+		echo '</div>';
+
+		echo '</div>';
+	}
+	// log_it($attributes);
 	$block_text = esc_html( $attributes['blockText'] );
-	return '<p style="color:' . $attributes['blockColor'] . '; background:' . $attributes['blockBackground'] . ';">' . $block_text . '</p>';
+	// return '<p style="color:' . $attributes['blockColor'] . '; background:' . $attributes['blockBackground'] . ';">' . $block_text . '</p>';
+	return ob_get_clean();
+
 }
 
 function sp_remove_blocks_in_draft( $pre_render, $block ) {

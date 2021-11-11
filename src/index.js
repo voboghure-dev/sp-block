@@ -25,16 +25,18 @@ registerBlockType( 'sp-block/dynamic-blog-post', {
 
 	attributes: {
 		blockColumns: {
-			type: 'string'
+			default: 1,
+			type: 'number'
 		},
 		blockRows: {
-			type: 'string'
+			default: 1,
+			type: 'number'
 		},
-		blockSize: {
-			default: '',
-			type: 'string',
-	  	},
-		  blockText: {
+		// blockSize: {
+		// 	default: '',
+		// 	type: 'string',
+	  	// },
+		blockText: {
 			default: 'SP Block Plugin – hello from the editor!',
 			type: 'string',
 	  	},

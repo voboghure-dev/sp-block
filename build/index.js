@@ -26,13 +26,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+ // import { useState } from '@wordpress/element';
 
 
 function Edit({
   attributes,
   setAttributes
 }) {
+  // console.log(attributes);
   const {
     blockColumns,
     blockRows,
@@ -42,7 +43,7 @@ function Edit({
     blockText,
     isBlockDraft
   } = attributes;
-  return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Panel, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Panel, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Column & Row', 'sp-block'),
     icon: "grid-view"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
@@ -51,7 +52,7 @@ function Edit({
     onChange: blockColumns => setAttributes({
       blockColumns
     }),
-    min: 2,
+    min: 1,
     max: 10
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
     label: "Rows",
@@ -61,35 +62,6 @@ function Edit({
     }),
     min: 1,
     max: 10
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select Product', 'sp-block'),
-    icon: "admin-plugins"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
-    label: "Size",
-    value: blockSize,
-    options: [{
-      label: 'Big',
-      value: '100%'
-    }, {
-      label: 'Medium',
-      value: '50%'
-    }, {
-      label: 'Small',
-      value: '25%'
-    }],
-    onChange: blockSize => setAttributes({
-      blockSize
-    })
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Block Content', 'sp-block'),
-    icon: "admin-plugins"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Example Meta', 'sp-block'),
-    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This is an example meta field.', 'sp-block'),
-    onChange: blockText => setAttributes({
-      blockText
-    }),
-    value: blockText
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Color Settings', 'sp-block'),
     icon: "art",
@@ -136,7 +108,7 @@ function Edit({
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Block Text', 'sp-block'),
     tagName: "span",
     value: blockText
-  }))];
+  })));
 }
 
 /***/ }),
@@ -174,15 +146,17 @@ __webpack_require__.r(__webpack_exports__);
   save: () => null,
   attributes: {
     blockColumns: {
-      type: 'string'
+      default: 1,
+      type: 'number'
     },
     blockRows: {
-      type: 'string'
+      default: 1,
+      type: 'number'
     },
-    blockSize: {
-      default: '',
-      type: 'string'
-    },
+    // blockSize: {
+    // 	default: '',
+    // 	type: 'string',
+    // },
     blockText: {
       default: 'SP Block Plugin – hello from the editor!',
       type: 'string'
