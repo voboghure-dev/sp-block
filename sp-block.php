@@ -68,8 +68,8 @@ function render_callback_blog_post( $attributes, $content ) {
 		'order' => 'DESC',
 	);
 	$products = wc_get_products( $args );
+	ob_start();
 	foreach ( $products as $product ) {
-		ob_start();
 		echo '<div class="pb-wc-product-bundles-item">';
 
 		echo '<div class="pb-wc-product-bundles-item-image">';
@@ -87,8 +87,6 @@ function render_callback_blog_post( $attributes, $content ) {
 		echo '</div>';
 	}
 	// log_it($attributes);
-	$block_text = esc_html( $attributes['blockText'] );
-	// return '<p style="color:' . $attributes['blockColor'] . '; background:' . $attributes['blockBackground'] . ';">' . $block_text . '</p>';
 	return ob_get_clean();
 
 }

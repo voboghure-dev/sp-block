@@ -2,6 +2,7 @@ import { __ } from '@wordpress/i18n';
 
 import { ContrastChecker, InspectorControls, PanelColorSettings, RichText, useBlockProps } from '@wordpress/block-editor';
 import { Panel, PanelBody, TextControl, ToggleControl, SelectControl, RangeControl } from '@wordpress/components';
+import ServerSideRender from '@wordpress/server-side-render';
 // import { useState } from '@wordpress/element';
 
 import './editor.scss';
@@ -103,13 +104,17 @@ export default function Edit( { attributes, setAttributes } ) {
 					color: blockColor,
 				} }
 			>
-				<RichText
+				{/* <RichText
 					className="block__text"
 					onChange={ ( blockText ) => setAttributes( { blockText } ) }
 					placeholder={ __( 'Block Text', 'sp-block' ) }
 					tagName="span"
 					value={ blockText }
-				/>
+				/> */}
+				<ServerSideRender
+                    block="sp-block/dynamic-blog-post"
+                    attributes={ attributes }
+                />
 			</p>
 		</>
 	);
